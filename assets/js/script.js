@@ -42,13 +42,22 @@ masih banyak hal yanh bakal kita jalanin bareng, dede masih mau bikin lebih bany
 i love you so much, cito! happy 5 months to us <3`
 
 
-if (pengirim) {
-  nama.innerHTML = pengirim
-  nama1.innerHTML = pengirim
-} else {
-  nama.innerHTML = "Nama Kamu"
-  nama1.innerHTML = "Nama Kamu"
+// Nama pengirim tetap digunakan pada header notifikasi.
+nama.textContent = pengirim
+nama1.textContent = pengirim
+
+// Coba putar musik saat halaman pertama kali dibuka.
+// Browser tertentu memblokir autoplay dengan suara; tombol Mulai menjadi fallback.
+const mulaiMusik = () => {
+  if (!audio) return
+  audio.play().catch(() => {
+    // Autoplay bersuara diblokir browser. Musik akan dicoba lagi saat pengguna
+    // melakukan interaksi pertama melalui tombol Mulai.
+  })
 }
+
+document.addEventListener('DOMContentLoaded', mulaiMusik)
+if (document.readyState !== 'loading') mulaiMusik()
 
 
 // ================================
@@ -56,15 +65,13 @@ if (pengirim) {
 // ================================
 
 btnPlay.addEventListener('click', () => {
-
-  audio.play()
+  mulaiMusik()
 
   messege1.style.display = "block"
   messege1.style.transform = "translateX(0)"
 
   btnPlay.style.display = "none"
   hilang1.style.display = "block"
-
 })
 
 
@@ -73,104 +80,34 @@ btnPlay.addEventListener('click', () => {
 // ================================
 
 hilang1.addEventListener('click', () => {
-
   messege1.style.display = "none"
-
   messege2.style.transform = "translateX(0)"
 
   hilang1.style.display = "none"
-  hilang2.style.display = "block"
+  hilang2.style.display = "none"
 
+  let i = 0
+  const speed = 50
+  const txt = pesan
 
-  Swal.fire({
-    imageUrl: "/assets/img/stiker_mylove.gif",
-    imageHeight: 120,
+  // Bersihkan isi sebelumnya agar animasi selalu dimulai dari awal.
+  messege2P.textContent = ""
 
-    title: 'Tulis nama kamu di sini sayangg',
-
-    html: `
-      <input 
-        type="text" 
-        id="login" 
-        class="swal2-input" 
-        placeholder="Nama Kamu"
-      >
-    `,
-
-    confirmButtonText: 'Kirim',
-    focusConfirm: false,
-
-    preConfirm: () => {
-
-      const login = Swal
-        .getPopup()
-        .querySelector('#login')
-        .value
-
-      if (!login) {
-        Swal.showValidationMessage(
-          `Masukin nama kamu sayanggg :(`
-        )
-      }
-
-      return {
-        login
-      }
+  const typeWriter = () => {
+    if (i < txt.length) {
+      messege2P.textContent += txt.charAt(i)
+      i++
+      messege2.classList.remove('kelip')
+      setTimeout(typeWriter, speed)
+    } else {
+      messege2.classList.add('kelip')
+      body.classList.replace('background1', 'background2')
+      body.classList.add('muncul')
+      hilang2.style.display = "block"
     }
+  }
 
-  }).then((result) => {
-
-    // Pastikan user benar-benar memasukkan nama
-    if (!result.value || !result.value.login) {
-      return
-    }
-
-    let i = 0
-    const speed = 50
-
-    // ================================
-    // PESAN YANG AKAN DIKETIK
-    // ================================
-
-    const txt = `Halo, ${result.value.login} sayang. ${pesan}`
-
-
-    // ================================
-    // TYPEWRITER
-    // ================================
-
-    const typeWriter = () => {
-
-      if (i < txt.length) {
-
-        messege2P.innerHTML += txt.charAt(i)
-
-        i++
-
-        messege2.classList.remove('kelip')
-
-        hilang2.style.display = "none"
-
-        setTimeout(typeWriter, speed)
-
-      } else {
-
-        messege2.classList.add('kelip')
-
-        body.classList.replace(
-          'background1',
-          'background2'
-        )
-
-        body.classList.add('muncul')
-
-        hilang2.style.display = "block"
-      }
-    }
-
-    typeWriter()
-
-  })
+  typeWriter()
 })
 
 
