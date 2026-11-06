@@ -37,7 +37,7 @@ const pengirim = "Baby"
 
 const pesan = `hi mortous petterson, happy 5th monthsary! i'm really happy that i get to spend these months with you. thank you for being here, for loving me, and for making even the little things feel special. i know we're not always going to have good days, but i hope we can always figure things out together and never get tired of choosing each other.
 
-masih banyak hal yanh bakal kita jalanin bareng, dede masih mau bikin lebih banyak kenangan, happy sedih bareng sama kamu, ngobrol sampai larut, dengerin cerita kamu, di temenin terus di semua kegiatan dan juga ngelakuin banyak hal kecil lainnya sama kamu. dede gaa tau ke depannya akan seperti apa, tapi satu hal yang dede tau, i still want you to be part of every story and everything that comes my way. 
+masih banyak hal yang bakal kita jalanin bareng, dede masih mau bikin lebih banyak kenangan, happy sedih bareng sama kamu, ngobrol sampai larut, dengerin cerita kamu, di temenin terus di semua kegiatan dan juga ngelakuin banyak hal kecil lainnya sama kamu. dede gaa tau ke depannya akan seperti apa, tapi satu hal yang dede tau, i still want you to be part of every story and everything that comes my way. 
 
 i love you so much, cito! happy 5 months to us <3`
 
